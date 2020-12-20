@@ -80,7 +80,11 @@
                                               );
 
                     }else if($get == 'search'){
-                        $for_us = $_POST['search_for'];
+                        if(isset($_POST['search_for']))
+                            $for_us = $_POST['search_for'];
+                        else
+                            $for_us = $_GET['for'];
+
                         $result = mysqli_query($conn, "SELECT 
                                                             users.username 			    AS 'usernamee',
                                                             users.profile_name 		    AS 'profile_name',
