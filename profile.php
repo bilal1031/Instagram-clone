@@ -22,10 +22,6 @@
                     class="navigation__logo"
                 />
             </a>
-            <div class="navigation__search-container">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search">
-            </div>
             <div class="navigation__icons">
                 <a href="explore.html" class="navigation__link">
                     <i class="fa fa-compass"></i>

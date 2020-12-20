@@ -24,10 +24,6 @@
                     class="navigation__logo"
                 />
             </a>
-            <div class="navigation__search-container">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search">
-            </div>
             <div class="navigation__icons">
                 <a href="explore.html" class="navigation__link">
                     <i class="fa fa-compass"></i>
@@ -83,6 +79,24 @@
                                                         WHERE followings.following = '$for_us' "
                                               );
 
+                    }else if($get == 'search'){
+                        $for_us = $_POST['search_for'];
+                        $result = mysqli_query($conn, "SELECT 
+                                                            users.username 			    AS 'usernamee',
+                                                            users.profile_name 		    AS 'profile_name',
+                                                            users.profile_picture 	    AS 'profile_picture',
+                                                            (
+                                                                SELECT  1
+                                                                FROM    followings
+                                                                WHERE   followings.username = '$curr_us'
+                                                                            AND
+                                                                        followings.following = usernamee
+                                                            )						    AS 'isFollowing'
+                                                        FROM users
+                                                        WHERE 	users.username     LIKE '%$for_us%' -- searching for
+                                                                    OR
+                                                                users.profile_name LIKE '%$for_us%' "
+                                              );
                     }
 
                     while($row = mysqli_fetch_array($result)){
@@ -105,7 +119,7 @@
                                                     echo $profile_picture;
                                             ?>
                                     class="people__avatar"
-                                    
+
                                 />
                             </div>
                             <div class="people__info">

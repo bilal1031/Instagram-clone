@@ -23,10 +23,13 @@
                     class="navigation__logo"
                 />
             </a>
-            <div class="navigation__search-container">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search">
-            </div>
+            <form action="explore.php?curr=<?php echo $us?>&for=_&get=search" class="navigation__search-container" method="post">
+                <div class="navigation__search-container">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search_for" placeholder="Search">
+                    <input type="submit" id="search" name="search" value="Search">
+                </div>
+            </form>
             <div class="navigation__icons">
                 <a href="explore.php" class="navigation__link">
                     <i class="fa fa-compass"></i>
@@ -42,15 +45,15 @@
         <main class="feed">
             <?php
 
-                $result = mysqli_query($conn, " select 
-                                                    followings.following AS follower,
+                $result = mysqli_query($conn, "SELECT 
+                                                    followings.following                AS follower,
                                                     (
                                                         SELECT users.profile_picture
                                                         FROM users
                                                         WHERE username = followings.following
-                                                    ) AS following_dp,
-                                                    posts.post_id AS post_id,
-                                                    posts.photo AS photo, 
+                                                    )                                   AS following_dp,
+                                                    posts.post_id                       AS post_id,
+                                                    posts.photo                         AS photo, 
                                                     likes,
                                                     (
                                                         SELECT 1
@@ -60,21 +63,7 @@
                                                               likes.likername = followings.username
                                                     ) AS is_liked,
                                                     comments,
-                                                    (
-                                                        SELECT commentername
-                                                        FROM comments
-                                                        WHERE comments.post_id = posts.post_id
-                                                        ORDER BY time_stamp DESC
-                                                        LIMIT 1
-                                                    ) AS commenter_name,
-                                                    (
-                                                        SELECT comment_text
-                                                        FROM comments
-                                                        WHERE comments.post_id = posts.post_id
-                                                        ORDER BY time_stamp DESC
-                                                        LIMIT 1
-                                                    ) AS comment_text,
-                                                    datediff(now(), posts.time_stamp) AS time_stamp
+                                                    datediff(now(), posts.time_stamp)   AS time_stamp
                                                     
                                                 from followings
                                                 join posts
@@ -97,8 +86,6 @@
                     $likes          = $row['likes'];
                     $is_liked       = $row['is_liked'];
                     $comments_count = $row['comments'];
-                    $commenter_name = $row['commenter_name'];
-                    $comment_text   = $row['comment_text'];
                     $created_at     = $row['time_stamp'];
 
             ?>
@@ -123,10 +110,7 @@
                     </div>
                 </header>
                 <div class="photo__file-container">
-                    <img
-                        class="photo__file"
-                        src=<?php echo $photo?>
-                    />
+                    <a href="image-detail.php?post_id=<?php echo $post_id?>&curr_us=<?php echo $us ?>"> <img class="photo__file" src=<?php echo $photo?> ></a>
                 </div>
                 <div class="photo__info">
                     <div class="photo__icons">
@@ -140,18 +124,47 @@
                                     echo "<i class = \"fa fa-heart-o heart fa-lg\"></i>";
                              ?>
                         </a> 
-                        </span>
-                        <span class="photo__icon">
+                        
+                        <a href="image-detail.php?post_id=<?php echo $post_id?>&curr_us=<?php echo $us ?>"> 
                             <i class="fa fa-comment-o fa-lg"></i>
-                        </span>
+                        </a>
                     </div>
                     <span class="photo__likes"><?php echo $likes ?> likes</span>
                     <ul class="photo__comments">
+
+                    <?php
+                        $result2 = mysqli_query($conn, "SELECT 
+                                                            comments.commentername AS 'commenter_name', 
+                                                            comments.comment_text  AS 'comment_text'
+                                                        FROM comments
+                                                        WHERE post_id = $post_id
+                                                        ORDER BY time_stamp DESC
+                                                        LIMIT 2"
+                                                );
+                        
+                        while($row2 = mysqli_fetch_array($result2)){
+                            $commenter_name = $row2['commenter_name'];
+                            $comment_text   = $row2['comment_text'];
+                    ?>
                         <li class="photo__comment">
                             <span class="photo__comment-author"><?php echo $commenter_name ?></span><?php echo $comment_text ?>
                         </li>
+                    <?php
+                        }
+                    ?>
+                        
                         <li class="photo__comment">
-                            <span class="photo__comment-author"><?php echo $comments_count-1 ?> more comments...</span>
+                            <span class="photo__comment-author">
+                            <?php 
+                                if($comments_count != 0 && $comments_count != 1){ 
+                                    echo $comments_count-2; 
+                                } else if($comment_text == 1){
+                                    echo $comments_count-1;
+                                } else{
+                                    echo $comments_count;
+                                }
+                            ?> 
+                            more comments...</span>
                         </li>
                     </ul>
                     <span class="photo__time-ago"><?php echo $created_at ?> days</span>
