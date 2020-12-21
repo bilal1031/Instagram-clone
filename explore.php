@@ -92,12 +92,12 @@
                                                             (
                                                                 SELECT  1
                                                                 FROM    followings
-                                                                WHERE   followings.username = '$curr_us'
+                                                                WHERE   followings.username = '$curr_us' 
                                                                             AND
                                                                         followings.following = usernamee
                                                             )						    AS 'isFollowing'
                                                         FROM users
-                                                        WHERE 	users.username     LIKE '%$for_us%' -- searching for
+                                                        WHERE 	users.username     LIKE '%$for_us%'     -- searching for
                                                                     OR
                                                                 users.profile_name LIKE '%$for_us%' "
                                               );
@@ -109,28 +109,28 @@
                         $profile_name       = $row['profile_name'];
                         $profile_picture    = $row['profile_picture'];
                         $ifFollowing        = $row['isFollowing'];
-                
                 ?>
-                    
+                
                     <li class="people__person">
-                        <div class="people__column">
-                            <div class="people__avatar-container">
-                                <img 
-                                    src =   <?php 
-                                                if($profile_picture == null)
-                                                    echo "images/avatar.svg";
-                                                else
-                                                    echo $profile_picture;
-                                            ?>
-                                    class="people__avatar"
-
-                                />
+                        <a href= "profile.php?curr_us=<?php echo $curr_us?>&profile_for=<?php echo $usernamee?>">
+                            <div class="photo__header">
+                                <div class="people__avatar-container">
+                                    <img 
+                                        src =   <?php 
+                                                    if($profile_picture == null)
+                                                        echo "images/avatar.svg";
+                                                    else
+                                                        echo $profile_picture;
+                                                ?>
+                                        class="people__avatar"
+                                    />
+                                </div>
+                                <div class="people__info">
+                                    <span class="people__username"><?php echo $usernamee?></span>
+                                    <span class="people__full-name"><?php echo $profile_name?></span>
+                                </div>
                             </div>
-                            <div class="people__info">
-                                <span class="people__username"><?php echo $usernamee?></span>
-                                <span class="people__full-name"><?php echo $profile_name?></span>
-                            </div>
-                        </div>
+                        </a>
                         <div class="people__column">
                             <?php if($curr_us != $usernamee){?>
                                 <?php if($ifFollowing == 1){ ?>

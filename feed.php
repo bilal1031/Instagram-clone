@@ -61,7 +61,7 @@
                                                         WHERE likes.post_id = posts.post_id
                                                                 AND
                                                               likes.likername = followings.username
-                                                    ) AS is_liked,
+                                                    )                                   AS is_liked,
                                                     comments,
                                                     datediff(now(), posts.time_stamp)   AS time_stamp
                                                     
@@ -75,7 +75,7 @@
                                                                         LIMIT 1
                                                                     )
                                                 where followings.username = '$us'
-                                                group by followings.following;"
+                                                group by followings.following; "
                                         );
 
                 while($row = mysqli_fetch_array($result)){
@@ -151,21 +151,23 @@
                         </li>
                     <?php
                         }
-                    ?>
-                        
+                    ?>    
+
+                    <a href="image-detail.php?post_id=<?php echo $post_id?>&curr_us=<?php echo $us ?>"> 
                         <li class="photo__comment">
                             <span class="photo__comment-author">
                             <?php 
-                                if($comments_count != 0 && $comments_count != 1){ 
+                                if($comments_count != 0 && $comments_count != 1)
                                     echo $comments_count-2; 
-                                } else if($comment_text == 1){
-                                    echo $comments_count-1;
-                                } else{
+                                else if($comments_count == 1 || $comments_count == 0)
+                                    echo "no";
+                                else
                                     echo $comments_count;
-                                }
                             ?> 
                             more comments...</span>
                         </li>
+                    </a>
+
                     </ul>
                     <span class="photo__time-ago"><?php echo $created_at ?> days</span>
                         <div class="photo__add-comment-container">
