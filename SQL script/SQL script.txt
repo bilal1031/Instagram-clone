@@ -2,7 +2,7 @@ create database insta_db;
 use insta_db;
 
 create table users(
-	username VARCHAR(25) PRIMARY KEY,
+    username VARCHAR(25) PRIMARY KEY,
     password VARCHAR(25) NOT NULL,
     profile_name VARCHAR(25) NOT NULL,
     profile_picture BLOB,
