@@ -1,8 +1,8 @@
 # Instagram-clone
 Instagram clone using PHP, HTML, CSS and mySQL
 
-1. first run SQL script on mySQL(available in SQL script folder), to create schema.
-2. once database is creeated.
-3. then using localhost, run index.php
-4. sign-in or sign-up.
-5. enjoy.
+1. First run SQL script on mySQL(available in SQL script folder), to create database.
+2. Once database is created.
+3. Then using localhost, run index.php
+4. Sign-in or sign-up.
+5. Enjoy.
