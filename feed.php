@@ -34,8 +34,12 @@
                 <a href="explore.php" class="navigation__link">
                     <i class="fa fa-compass"></i>
                 </a>
-                <a href="#" class="navigation__link">
-                    <i class="fa fa-heart-o"></i>
+                <a href="post.php?username=<?php echo $us?>" class="navigation__link">
+                    <img
+                        class=" "
+                            src= <?php echo "images/plus.svg"?>
+                            style="width:17px; height:17px"
+                        />
                 </a>
                 <a href="profile.php?curr_us=<?php echo $us ?>&profile_for=<?php echo $us ?>" class="navigation__link">
                     <i class="fa fa-user-o"></i>
@@ -99,7 +103,7 @@
                                         echo "images/avatar.svg";
                                     else
                                         echo $following_dp;
-                                ?>
+                                 ?>
                             style="width:30px;height:30px"
                         />
                     </div>

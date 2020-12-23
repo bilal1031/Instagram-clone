@@ -18,6 +18,7 @@ CREATE TABLE posts (
 	post_id INT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(25),
 	photo BLOB NOT NULL,
+    description varchar(100),
 	likes INT DEFAULT 0,
 	comments INT DEFAULT 0,
     time_stamp DATETIME DEFAULT now(),
