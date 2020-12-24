@@ -9,8 +9,8 @@ create table users(
     followings INT DEFAULT 0,
     followers INT DEFAULT 0,
     posts INT DEFAULT 0,
-    email VARCHAR(25) NOT NULL,
-    bio VARCHAR(100),
+    email VARCHAR(50) NOT NULL,
+    bio VARCHAR(1000),
     time_stamp DATETIME DEFAULT now()
 );
 
@@ -52,3 +52,8 @@ CREATE TABLE comments(
     FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE
 );
 
+select * from users;
+select * from posts;
+select * from comments;
+select * from likes;
+select * from followings;
