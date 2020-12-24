@@ -1,5 +1,4 @@
 <?php
-    include "connect.php";
     function usercheck($username){
         $flag = false;
             include "connect.php";
@@ -30,20 +29,22 @@
                header("Location:registration.php?reg=0");
                exit();
             }else{
+                include "connect.php";
+
                 $target = "photos/".basename($_FILES['image']['name']);
                 $image = $_FILES['image']['name'];
                 //echo 'photos/'.$image;
                
                 $query =   "INSERT INTO users (username,password,profile_name,profile_picture,email,bio) 
                             VALUES ('$username', '$password', '$profilename', 'photos/$image', '$email', '$bio')";
-            
-                if(mysqli_query($conn, $query)){
+
+                $result = mysqli_query($conn, $query);
+
+                if($result){
                     move_uploaded_file($_FILES['image']['tmp_name'], $target);
-
                     $conn->close();
-                    //header("Location:index.php");
+                    header("Location:registration.php?reg=1");
                     exit();
-
                 }else{
                     $conn->close();
                     header("Location:registration.php?reg=0");
@@ -53,7 +54,7 @@
             }
         }
     }else{
-        //header("Location:404.php");
+        header("Location:404.php");
         exit(); 
     }  
  ?>

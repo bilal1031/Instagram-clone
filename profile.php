@@ -83,7 +83,9 @@
                     <div class="profile__info">
                         
                         <div class="profile__name">
-                            <h1 class="profile__title"><?php echo $us ?></h1>
+                            <h1 class="profile__title"><?php echo $us ?>
+                                <img src = "images\verified.png" />
+                            </h1>
                             <?php 
                                 if($curr_us == $us){
                             ?>

@@ -126,7 +126,9 @@
                                     />
                                 </div>
                                 <div class="people__info">
-                                    <span class="people__username"><?php echo $usernamee?></span>
+                                    <span class="people__username"><?php echo $usernamee?>
+                                    <img src = "images\verified.png" />
+                                    </span>
                                     <span class="people__full-name"><?php echo $profile_name?></span>
                                 </div>
                             </div>

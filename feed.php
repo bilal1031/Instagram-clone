@@ -110,6 +110,7 @@
                     <div class="photo__header-column">
                         <a href = "profile.php?curr_us=<?php echo $us?>&profile_for=<?php echo $follower?>">
                             <?php echo $follower?>
+                            <img height = "13" width = "13"src = "images\verified.png" />
                         </a>
                     </div>
                 </header>

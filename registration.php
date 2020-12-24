@@ -49,7 +49,6 @@
                             name = "username"
                             class="edit-profile__input"
                             required
-                            pattern="[a-zA-Z0-9]+"
                         />
                     </div>
                     <div class="edit-profile__form-row">
@@ -73,8 +72,7 @@
                             id="password"
                             name = "password"
                             class="edit-profile__input"
-                            required
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                            required 
                             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
                         />
                     </div>
